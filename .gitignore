@@ -1,0 +1,27 @@
+# Ignore arquivos e pastas do Visual Studio
+.vs/
+*.user
+*.suo
+*.cache
+*.csproj.user
+*.sln.docstates
+
+# Ignore binários e builds
+bin/
+obj/
+build/
+
+# Ignore pacotes
+*.nupkg
+*.snupkg
+packages/
+*.log
+
+# Ignore arquivos temporários
+*.tmp
+*.bak
+*.swp
+*~ 
+
+# Ignore configurações locais
+appsettings.*.json
