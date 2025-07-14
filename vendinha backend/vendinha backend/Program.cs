@@ -1,23 +1,13 @@
-var builder = WebApplication.CreateBuilder(args);
+using vendinha_backend;
+using vendinha_backend.Interfaces;
+using vendinha_backend.Models;
+using vendinha_backend.Repository.Implementations;
+using vendinha_backend.Services;
 
-// Add services to the container.
+Metodos.PrintNome(new Cliente());
+Metodos.PrintNome(new Divida());
+Metodos.PrintNome(new Pagamento());
 
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 
-var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
 
-app.UseAuthorization();
-
-app.MapControllers();
-
-app.Run();

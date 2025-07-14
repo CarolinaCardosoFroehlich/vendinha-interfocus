@@ -15,6 +15,6 @@ namespace vendinha_backend.Models
 
         public DateTime DataNascimento { get; set; }
 
-        public DateTime DataCadastro { get; set; } = DateTime.Now
+        public DateTime DataCadastro { get; set; } = DateTime.Now;
     }
 }
