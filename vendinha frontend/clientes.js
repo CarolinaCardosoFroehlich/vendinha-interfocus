@@ -30,8 +30,6 @@ function atualizarTabela() {
     `;
     corpo.appendChild(tr);
   });
-
-  // Soma total de todas as dívidas (de todos os clientes, não só os visíveis)
   const totalGeral = clientes.reduce((soma, c) => soma + c.totalDividas, 0);
 
   document.getElementById("valor-total").innerText = totalGeral.toLocaleString('pt-BR', {

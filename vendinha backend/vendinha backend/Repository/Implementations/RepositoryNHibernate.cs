@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using vendinha_backend.Repository;
 
 namespace vendinha_backend.Repository.Implementations
 {
@@ -15,7 +16,6 @@ namespace vendinha_backend.Repository.Implementations
         public RepositoryNHibernate(ISessionFactory sessionFactory)
         {
             this.sessionFactory = sessionFactory;
-            // conecta no banco de dados
             this.session = sessionFactory.OpenSession();
         }
 
@@ -54,6 +54,10 @@ namespace vendinha_backend.Repository.Implementations
         public void Salvar(object model)
         {
             session.Merge(model);
+        }
+        public void Incluir(object model)
+        {
+            session.Save(model);
         }
     }
 }

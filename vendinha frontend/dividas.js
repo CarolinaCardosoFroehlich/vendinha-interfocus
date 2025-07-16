@@ -56,7 +56,7 @@ function calcularSomaPorCliente(dividas) {
 
 async function marcarComoPaga(id) {
   try {
-    const resposta = await fetch(`http://localhost:5000/api/divida/${id}/pagar`, {
+    const resposta = await fetch(`http://localhost:5221/api/divida/${id}/pagar`, {
       method: "PUT"
     });
 

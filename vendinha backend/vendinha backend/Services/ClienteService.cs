@@ -2,19 +2,21 @@
 using System.Text.RegularExpressions;
 using vendinha_backend.Models;
 using vendinha_backend.Repository;
+using vendinha_backend.Repository.Implementations;
 
 
 namespace vendinha_backend.Services
 {
     public class ClienteService
     {
-        private readonly IRepository repository;
+        private readonly RepositoryInMemory repository;
 
-        //cadastrar
-        public ClienteService(IRepository repository)
+        public ClienteService(RepositoryInMemory repository)
         {
             this.repository = repository;
         }
+
+        //cadastrar
 
         public bool Cadastrar(Cliente cliente, out List<MensagemErro> mensagens)
         {
@@ -24,6 +26,7 @@ namespace vendinha_backend.Services
                 try
                 {
                     using var transacao = repository.IniciarTransacao();
+                    repository.Incluir(cliente);
                     repository.Commit();
                     return true;
                 }
@@ -114,6 +117,10 @@ namespace vendinha_backend.Services
                 repository.Rollback();
                 return null;
             }
+        }
+        public void Adicionar(Cliente cliente)
+        {
+            repository.Incluir(cliente);
         }
     }
 }

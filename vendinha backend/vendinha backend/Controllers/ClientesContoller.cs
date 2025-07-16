@@ -21,7 +21,7 @@ namespace vendinha_backend.Controllers
         public IActionResult Get(string pesquisa)
         {
             return string.IsNullOrEmpty(pesquisa) ?
-                Ok(servico.Consultar()) :
+                Ok(servico.ConsultarClientesOrdenadosPorDivida()) :
                 Ok(servico.Consultar(pesquisa));
         }
 

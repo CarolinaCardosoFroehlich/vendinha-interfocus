@@ -3,6 +3,7 @@
     public interface IRepository
     {
         void Salvar(object model);
+        void Incluir(object model);
         void Excluir(object model);
         T ConsultarPorId<T>(long id);
         IQueryable<T> Consultar<T>();

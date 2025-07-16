@@ -105,3 +105,5 @@ document.addEventListener("DOMContentLoaded", () => {
   carregarClientes();
   carregarDividas();
 });
+
+const API_URL = "http://localhost:5221";

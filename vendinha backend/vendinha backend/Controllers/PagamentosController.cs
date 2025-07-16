@@ -12,7 +12,7 @@ namespace vendinha_backend.Controllers
     {
         private readonly PagamentoService servico;
 
-        public PagamentosController(DividasService servico)
+        public PagamentosController(PagamentoService servico)
         {
             this.servico = servico;
         }
@@ -52,12 +52,12 @@ namespace vendinha_backend.Controllers
         [HttpGet("{id}")]
         public IActionResult GetById(long id)
         {
-            var curso = servico.ConsultarPorCodigo(id);
-            if (curso == null)
+            var divida = servico.ConsultarPorCodigo(id);
+            if (divida == null)
             {
                 return NotFound();
             }
-            return Ok(result);
+            return Ok(divida);
         }
     }
 }
