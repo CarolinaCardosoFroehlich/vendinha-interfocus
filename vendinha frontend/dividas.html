@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Dívidas Cadastradas - DividaFácil</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="shortcut icon" href="icons8-$-96.png" type="image/x-icon">
+</head>
+<body>
+  <div class="container">
+    <aside class="menu">
+      <h1>DividaFácil</h1>
+      <nav>
+        <ul>
+          <li>
+          <a class="back_container" href="index.html"> Voltar</a>
+        </li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="dashboard">
+      <h2>Dívidas Cadastradas</h2>
+
+      <section class="tabela">
+        <table>
+          <thead>
+            <tr>
+              <th>Cliente</th>
+              <th>Descrição</th>
+              <th>Valor</th>
+              <th>Situação</th>
+              <th>Ação</th>
+            </tr>
+          </thead>
+          <tbody id="lista-dividas">
+          </tbody>
+        </table>
+
+        <div class="total-dividas">
+          <strong>Total por cliente:</strong>
+          <ul id="soma-clientes">
+          </ul>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="dividas.js"></script>
+</body>
+</html>

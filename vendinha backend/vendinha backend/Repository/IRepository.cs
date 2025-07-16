@@ -1,8 +1,7 @@
 ﻿namespace vendinha_backend.Repository
 {
-    public class IRepository
+    public interface IRepository
     {
-        void Incluir(object model);
         void Salvar(object model);
         void Excluir(object model);
         T ConsultarPorId<T>(long id);

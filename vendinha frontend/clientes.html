@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Clientes Cadastrados - DividaFácil</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="shortcut icon" href="icons8-$-96.png" type="image/x-icon">
+</head>
+<body>
+  <div class="container">
+    <aside class="menu">
+      <h1>DividaFácil</h1>
+      <nav>
+        <ul>
+          <li>
+            <a class="back_container" href="index.html">Voltar</a>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="dashboard">
+      <h2>Clientes Cadastrados</h2>
+
+      <div class="busca">
+        <input type="text" id="buscaNome" placeholder="Buscar por nome..." oninput="buscarClientes()">
+      </div>
+
+      <section class="tabela">
+        <thead>
+            <tr class="tabela_clientes">
+                <th>Nome</th>
+                <th>CPF</th>
+                <th>Total de Dívidas</th>
+                <th>Idade</th>
+            </tr>
+        </thead>
+        <tbody id="lista-clientes"></tbody>
+        </table>
+
+        <div id="paginacao" class="paginacao">
+        </div>
+
+        <div class="total-dividas">
+          <strong>Total em dívidas:</strong> R$ <span id="valor-total">0,00</span>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="clientes.js"></script>
+</body>
+</html>

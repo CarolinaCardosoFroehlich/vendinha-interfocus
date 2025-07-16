@@ -38,16 +38,6 @@ namespace vendinha_backend.Controllers
             return UnprocessableEntity(erros);
         }
 
-        [HttpPut]
-        public IActionResult Put([FromBody] Divida divida)
-        {
-            var resultado = servico.Editar( divida);
-            if (resultado == null)
-            {
-                return NotFound();
-            }
-            return Ok(resultado);
-        }
 
         [HttpDelete("{codigo}")]
         public IActionResult Delete(int codigo)
@@ -63,12 +53,12 @@ namespace vendinha_backend.Controllers
         [HttpGet("{id}")]
         public IActionResult GetById(long id)
         {
-            var curso = servico.ConsultarPorCodigo(id);
-            if (curso == null)
+            var divida = servico.ConsultarPorCodigo(id);
+            if (divida == null)
             {
                 return NotFound();
             }
-            return Ok(dividaaaaaaaaaaaaaaaaaaaaaaaaaa);
+            return Ok(divida);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using vendinha_backend.Interfaces;
 using System;
+using vendinha_backend.Services;
 
 namespace vendinha_backend.Models
 {
@@ -16,5 +17,15 @@ namespace vendinha_backend.Models
         public string Descricao { get; set; } = string.Empty;
 
         public Divida? Divida { get; set; }
+
+        public Cliente Cliente { get; set; }
+
+        public decimal ValorTotal
+        {
+            get
+            {
+                return Cliente?.Dividas?.Sum(d => d?.ValorTotal ?? 0) ?? 0;
+            }
+        }
     }
 }

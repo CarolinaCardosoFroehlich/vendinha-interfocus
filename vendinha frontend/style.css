@@ -110,6 +110,13 @@ body {
   border-bottom: 1px solid #eee;
 }
 
+.tabela_clientes {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
 .oculto {
   display: none;
 }
@@ -192,4 +199,59 @@ body {
   background-color: black;
   color: white;
 }
- 
+
+.busca {
+  margin: 20px 0;
+}
+
+.busca input {
+  width: 300px;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.paginacao {
+  margin-top: 20px;
+}
+
+.paginacao button {
+  background: #3a86ff;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  margin-right: 5px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.total-dividas {
+  margin-top: 20px;
+  font-size: 18px;
+}
+
+.navegacao {
+  margin: 20px 0;
+  display: flex;
+  gap: 15px;
+}
+
+.navegacao button {
+  background-color: #7209b7;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.navegacao button:hover {
+  background-color: #560bad;
+}
+.back_container {
+    color: white;
+    text-decoration: none;
+}

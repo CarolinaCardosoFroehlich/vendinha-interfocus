@@ -36,38 +36,10 @@ namespace vendinha_backend.Controllers
             return UnprocessableEntity(erros);
         }
 
-
-        [HttpPut]
-        public IActionResult Put([FromBody] Cliente cliente)
-        {
-            var resultado = servico.Editar(cliente, out List<MensagemErro> mensagens);
-            if (resultado == null)
-            {
-                if (mensagens == null)
-                    return NotFound();
-                else
-                {
-                    return UnprocessableEntity(mensagens);
-                }
-            }
-            return Ok(resultado);
-        }
-
         [HttpDelete("{codigo}")]
         public IActionResult Delete(long codigo)
         {
             var resultado = servico.Deletar(codigo);
-            if (resultado == null)
-            {
-                return NotFound();
-            }
-            return Ok(resultado);
-        }
-
-        [HttpGet("{codigo}")]
-        public IActionResult GetById(long codigo)
-        {
-            var resultado = servico.ConsultarPorCodigo(codigo);
             if (resultado == null)
             {
                 return NotFound();

@@ -10,12 +10,13 @@ namespace vendinha_backend.Services
     {
         private readonly IRepository repository;
 
+        //cadastrar
         public ClienteService(IRepository repository)
         {
             this.repository = repository;
         }
-    }
-     public bool Cadastrar(Cliente cliente, out List<MensagemErro> mensagens)
+
+        public bool Cadastrar(Cliente cliente, out List<MensagemErro> mensagens)
         {
             var valido = Validar(cliente, out mensagens);
             if (valido)
@@ -23,7 +24,6 @@ namespace vendinha_backend.Services
                 try
                 {
                     using var transacao = repository.IniciarTransacao();
-                    repository.Incluir(cliente);
                     repository.Commit();
                     return true;
                 }
@@ -34,9 +34,9 @@ namespace vendinha_backend.Services
                 }
             }
             return false;
-
         }
 
+        //validar
         public static bool Validar(Cliente cliente, out List<MensagemErro> mensagens)
         {
             var validationContext = new ValidationContext(cliente);
@@ -59,13 +59,61 @@ namespace vendinha_backend.Services
                     erro.ErrorMessage);
             }
 
-            if (cliente.Divida > 2000)
+            if (cliente.Dividas.Sum(d => d.ValorTotal) > 200)
             {
-                mensagens.Add(new MensagemErro("divida", "o cliente não pode dever mais de 2000 R$"));
+                mensagens.Add(new MensagemErro("Dividas", "O cliente não pode dever mais de R$ 200,00."));
                 validation = false;
             }
 
+            //throw new Exception("dados invalidos!!!!");
             return validation;
+        }
+
+        //consultar
+        public List<Cliente> ConsultarClientesOrdenadosPorDivida()
+        {
+            return repository.Consultar<Cliente>()
+                .Where(c => c.Dividas != null && c.Dividas.Any()) 
+                .OrderByDescending(c => c.Dividas.Sum(d => d.ValorTotal))
+                .ToList();
+        }
+
+        public List<Cliente> Consultar(string pesquisa)
+        {
+            // lambda expression
+            var resultado2 = repository
+                .Consultar<Cliente>()
+                .Where(item => item.Nome.Contains(pesquisa))
+                .OrderBy(item => item.Nome)
+                .Take(10)
+                .ToList();
+            return resultado2;
+        }
+
+
+        //consultarPorId
+        public Cliente ConsultarPorCodigo(long codigo)
+        {
+            return repository.ConsultarPorId<Cliente>(codigo);
+        }
+
+
+        //deletar
+        public Cliente Deletar(long codigo)
+        {
+            var existente = ConsultarPorCodigo(codigo);
+            try
+            {
+                using var transacao = repository.IniciarTransacao();
+                repository.Excluir(existente);
+                repository.Commit();
+                return existente;
+            }
+            catch (Exception)
+            {
+                repository.Rollback();
+                return null;
+            }
         }
     }
 }

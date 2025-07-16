@@ -1,5 +1,6 @@
 ﻿using vendinha_backend.Enums;
 using vendinha_backend.Interfaces;
+using vendinha_backend.Services;
 using System;
 
 namespace vendinha_backend.Models

@@ -4,18 +4,17 @@ using vendinha_backend.Repository;
 
 namespace vendinha_backend.Services
 {
-    public class DividasService
+    public class PagamentoService
     {
-
         private readonly IRepository repository;
 
-        public DividasService(IRepository repository)
+        public PagamentoService(IRepository repository)
         {
             this.repository = repository;
         }
-        public bool Cadastrar(Divida divida, out List<MensagemErro> mensagens)
+        public bool Cadastrar(Pagamento pagamento, out List<MensagemErro> mensagens)
         {
-            var valido = Validar(divida, out mensagens);
+            var valido = Validar(pagamento, out mensagens);
             if (valido)
             {
                 try
@@ -32,39 +31,39 @@ namespace vendinha_backend.Services
             }
             return false;
         }
-        public bool Validar(Divida divida, out List<MensagemErro> mensagens)
+        public bool Validar(Pagamento pagamento, out List<MensagemErro> mensagens)
         {
-            var validationContext = new ValidationContext(divida);
+            var validationContext = new ValidationContext(pagamento);
             var erros = new List<ValidationResult>();
-            var validation = Validator.TryValidateObject(divida,
+            var validation = Validator.TryValidateObject(pagamento,
                 validationContext,
                 erros,
                 true);
             mensagens = new List<MensagemErro>();
 
-            var cursosNome = repository.Consultar<Divida>()
-                            .Where(e => e.Id == divida.Id)
+            var cursosNome = repository.Consultar<Pagamento>()
+                            .Where(e => e.Id == pagamento.Id)
                             .Count();
 
 
-            decimal total = divida.Cliente.Dividas.Sum(d => d.ValorTotal) + divida.ValorTotal;
+            decimal totalDividasCliente = pagamento.Cliente?.Dividas?.Sum(d => d?.ValorTotal ?? 0) ?? 0;
+            decimal totalComNovoPagamento = totalDividasCliente + pagamento.ValorTotal;
 
-            if (total > 200)
+            if (totalComNovoPagamento > 2000)
             {
-                mensagens.Add(new MensagemErro("Dividas", "O cliente não pode dever mais de R$ 200,00."));
+                mensagens.Add(new MensagemErro("Dividas", "O cliente não pode dever mais de R$ 2000,00."));
                 validation = false;
             }
+
             foreach (var erro in erros)
             {
-                var mensagem = new MensagemErro(
-                    erro.MemberNames.First(),
-                    erro.ErrorMessage);
+                var propriedade = erro.MemberNames.FirstOrDefault() ?? "CampoDesconhecido";
+                var mensagem = new MensagemErro(propriedade, erro.ErrorMessage);
 
                 mensagens.Add(mensagem);
-                Console.WriteLine("{0}: {1}",
-                    erro.MemberNames.First(),
-                    erro.ErrorMessage);
+                Console.WriteLine($"{propriedade}: {erro.ErrorMessage}");
             }
+
             return validation;
         }
         public List<Divida> Consultar()

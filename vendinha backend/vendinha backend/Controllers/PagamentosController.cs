@@ -10,7 +10,7 @@ namespace vendinha_backend.Controllers
     [ApiController]
     public class PagamentosController : ControllerBase
     {
-        private readonly DividasService servico;
+        private readonly PagamentoService servico;
 
         public PagamentosController(DividasService servico)
         {
@@ -36,17 +36,6 @@ namespace vendinha_backend.Controllers
                 return Ok(pagamento);
             }
             return UnprocessableEntity(erros);
-        }
-
-        [HttpPut]
-        public IActionResult Put([FromBody] Pagamento pagamento)
-        {
-            var resultado = servico.Editar(pagamento);
-            if (resultado == null)
-            {
-                return NotFound();
-            }
-            return Ok(resultado);
         }
 
         [HttpDelete("{codigo}")]

@@ -2,7 +2,7 @@
 
 namespace vendinha_backend.Repository.Implementations
 {
-    public class RepositoryInMemory
+    public class RepositoryInMemory : IDisposable
     {
         private static long contador = 10000;
 
