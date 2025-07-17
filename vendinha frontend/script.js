@@ -107,3 +107,4 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 const API_URL = "http://localhost:5221";
+fetch("http://localhost:5221/api/clientes")

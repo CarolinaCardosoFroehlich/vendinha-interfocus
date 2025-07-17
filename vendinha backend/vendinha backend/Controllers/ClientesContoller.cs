@@ -46,6 +46,11 @@ namespace vendinha_backend.Controllers
             }
             return Ok(resultado);
         }
+        [HttpGet]
+        public IActionResult Get()
+        {
+            return Ok(new { mensagem = "Funcionando!" });
+        }
 
     }
 }
