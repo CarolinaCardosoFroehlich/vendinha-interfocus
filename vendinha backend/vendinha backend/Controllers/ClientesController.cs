@@ -8,11 +8,11 @@ namespace vendinha_backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ClientesContoller : ControllerBase
+    public class ClientesController : ControllerBase
     {
         private readonly ClienteService servico;
 
-        public ClientesContoller(ClienteService servico)
+        public ClientesController(ClienteService servico)
         {
             this.servico = servico;
         }
@@ -28,11 +28,11 @@ namespace vendinha_backend.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] Cliente cliente)
         {
-
             if (servico.Cadastrar(cliente, out List<MensagemErro> erros))
             {
                 return Ok(cliente);
             }
+
             return UnprocessableEntity(erros);
         }
 
@@ -45,11 +45,6 @@ namespace vendinha_backend.Controllers
                 return NotFound();
             }
             return Ok(resultado);
-        }
-        [HttpGet]
-        public IActionResult Get()
-        {
-            return Ok(new { mensagem = "Funcionando!" });
         }
 
     }

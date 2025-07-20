@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace vendinha_backend.Models
 {
-    public class Cliente : IEntidade,  INomeavel
+    public class Cliente : IEntidade
     {
         public long Id { get; set; }
 
